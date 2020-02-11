@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Button } from '../../Components/Common/Atoms/Button';
+import React, {useState} from 'react';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Button} from '../../Components/Common/Atoms/Button';
 
 const t = {
   welcome: {
