@@ -1,13 +1,13 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import Welcome from './src/Containers/Welcome';
 import {AppStateProvider} from './src/Context';
+import AppSource from './src/Routing';
 
 const App = () => {
   return (
     <AppStateProvider>
       <NavigationContainer>
-        <Welcome />
+        <AppSource />
       </NavigationContainer>
     </AppStateProvider>
   );
