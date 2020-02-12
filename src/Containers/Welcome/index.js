@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Button} from '../../Components/Common/Atoms/Button';
+import { AppState } from '../../Context';
 
 const t = {
   welcome: {
-    title: 'Welcome to your HSC prep tool.',
+    title: 'Welcome to your preparation tool.',
     text:
-      'PrepMe helps your squeeze in more HSC content in small, bite-sized chunks.',
+      'PrepMe helps your squeeze in more content in small, bite-sized chunks.',
   },
 };
 
@@ -16,6 +17,10 @@ const Welcome = () => {
   const height = screenWidth > 0 ? screenWidth * 1.12 : 300;
 
   const styles = styleSheet({width, height});
+
+  const res = useContext(AppState);
+  console.log(res);
+
 
   return (
     <SafeAreaView>
