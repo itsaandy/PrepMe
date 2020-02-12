@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Button} from '../../Components/Common/Atoms/Button';
-import { AppState } from '../../Context';
+import {AppState} from '../../Context';
 
 const t = {
   welcome: {
@@ -11,7 +11,7 @@ const t = {
   },
 };
 
-const Welcome = () => {
+const Welcome = ({navigation}) => {
   const [screenWidth, setScreenWidth] = useState(0);
   const width = screenWidth > 0 ? screenWidth : '100%';
   const height = screenWidth > 0 ? screenWidth * 1.12 : 300;
@@ -20,7 +20,6 @@ const Welcome = () => {
 
   const res = useContext(AppState);
   console.log(res);
-
 
   return (
     <SafeAreaView>
