@@ -1,15 +1,18 @@
 import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import Welcome from '../Containers/Welcome';
+import WelcomeScreenContainer from '../Containers/WelcomeScreenContainer';
+import OnboardingScreenContainer from '../Containers/OnboardingScreenContainer';
+import { ONBOARDING_SCREEN, WELCOME_SCREEN } from './routeConstants';
 
 const AppSource = () => {
   let AppContainer = createAppContainer(
     createSwitchNavigator(
       {
-        home: Welcome,
+        [WELCOME_SCREEN]: WelcomeScreenContainer,
+        [ONBOARDING_SCREEN]: OnboardingScreenContainer,
       },
       {
-        initialRouteName: 'home',
+        initialRouteName: WELCOME_SCREEN,
       },
     ),
   );

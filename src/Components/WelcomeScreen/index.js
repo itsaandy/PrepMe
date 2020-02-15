@@ -1,7 +1,6 @@
-import React, {useState, useContext} from 'react';
+import React from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button} from '../../Components/Common/Atoms/Button';
-import {AppState} from '../../Context';
+import {Button} from '../Common/Atoms/Button';
 
 const t = {
   welcome: {
@@ -11,16 +10,8 @@ const t = {
   },
 };
 
-const Welcome = ({navigation}) => {
-  const [screenWidth, setScreenWidth] = useState(0);
-  const width = screenWidth > 0 ? screenWidth : '100%';
-  const height = screenWidth > 0 ? screenWidth * 1.12 : 300;
-
-  const styles = styleSheet({width, height});
-
-  const res = useContext(AppState);
-  console.log(res);
-
+const WelcomeScreen = ({imageDimensions, setScreenWidth, onPress}) => {
+  const styles = styleSheet(imageDimensions);
   return (
     <SafeAreaView>
       <View style={styles.wholeWrapper}>
@@ -30,14 +21,11 @@ const Welcome = ({navigation}) => {
         </View>
         <Image
           onLayout={e => setScreenWidth(e.nativeEvent.layout.width)}
-          style={{
-            width,
-            height,
-          }}
+          style={imageDimensions}
           source={require('../../assets/images/welcome-image.png')}
         />
         <View style={styles.buttonWrapper}>
-          <Button onPress={() => {}} label="NEXT" />
+          <Button onPress={onPress} label="NEXT" />
         </View>
       </View>
     </SafeAreaView>
@@ -77,4 +65,4 @@ const styleSheet = theme =>
     },
   });
 
-export default Welcome;
+export default WelcomeScreen;
