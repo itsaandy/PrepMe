@@ -18,7 +18,9 @@ WelcomeScreen.mockImplementation(({imageDimensions, onLayout, onPress}) => (
       {' '}
       <Text>Button</Text>
     </TouchableOpacity>
-    <TouchableOpacity testID="setScreenWidthButton" onPress={() => onLayout({nativeEvent: {layout: {width: 700}}})}>
+    <TouchableOpacity
+      testID="setScreenWidthButton"
+      onPress={() => onLayout({nativeEvent: {layout: {width: 700}}})}>
       <Text>Button</Text>
     </TouchableOpacity>
   </View>

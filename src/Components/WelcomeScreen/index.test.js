@@ -1,11 +1,5 @@
 import React from 'react';
-import {Image} from 'react-native';
-import {
-  act,
-  fireEvent,
-  render,
-  waitForElement,
-} from 'react-native-testing-library';
+import {fireEvent, render} from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 import WelcomeScreen from '.';
 import Button from '../Common/Atoms/Button';
