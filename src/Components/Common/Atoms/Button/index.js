@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-export const Button = ({label, onPress}) => {
+const Button = ({label, onPress}) => {
   const styles = styleSheet();
   return (
     <TouchableOpacity
@@ -34,3 +34,5 @@ const styleSheet = theme =>
       fontWeight: 'bold',
     },
   });
+
+export default Button;

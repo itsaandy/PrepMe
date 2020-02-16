@@ -6,17 +6,21 @@ const WelcomeScreenContainer = ({navigation}) => {
   const [screenWidth, setScreenWidth] = useState(0);
   const dimensions = {
     width: screenWidth > 0 ? screenWidth : '100%',
-    height: screenWidth > 0 ? screenWidth * 1.12 : 300,
+    height: screenWidth > 0 ? Math.round(screenWidth * 1.12) : 300,
   };
 
   const onPress = () => {
     navigation.navigate(ONBOARDING_SCREEN);
   };
 
+  const onLayout = e => {
+    setScreenWidth(e.nativeEvent.layout.width);
+  };
+
   return (
     <WelcomeScreen
       imageDimensions={dimensions}
-      setScreenWidth={setScreenWidth}
+      onLayout={onLayout}
       onPress={onPress}
     />
   );

@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`welcome screen tests should match snapshot 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": "100%",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginTop": 15,
+          "width": "95%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#1A1A1A",
+            "fontSize": 32,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Welcome to your preparation tool.
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#666666",
+            "marginTop": 20,
+          }
+        }
+      >
+        PrepMe helps your squeeze in more content in small, bite-sized chunks.
+      </Text>
+    </View>
+    <Image
+      onLayout={[Function]}
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/welcome-image.png",
+        }
+      }
+      style={
+        Object {
+          "height": 30,
+          "width": 30,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "marginBottom": 10,
+          "width": "95%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#4d13da",
+            "borderRadius": 5,
+            "height": 48,
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "white",
+              "fontWeight": "bold",
+              "textAlign": "center",
+            }
+          }
+        >
+          NEXT
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

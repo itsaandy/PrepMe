@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button} from '../Common/Atoms/Button';
+import Button from '../Common/Atoms/Button';
 
 const t = {
   welcome: {
@@ -10,7 +10,7 @@ const t = {
   },
 };
 
-const WelcomeScreen = ({imageDimensions, setScreenWidth, onPress}) => {
+const WelcomeScreen = ({imageDimensions, onLayout, onPress}) => {
   const styles = styleSheet(imageDimensions);
   return (
     <SafeAreaView>
@@ -20,7 +20,7 @@ const WelcomeScreen = ({imageDimensions, setScreenWidth, onPress}) => {
           <Text style={styles.text}>{t.welcome.text}</Text>
         </View>
         <Image
-          onLayout={e => setScreenWidth(e.nativeEvent.layout.width)}
+          onLayout={onLayout}
           style={imageDimensions}
           source={require('../../assets/images/welcome-image.png')}
         />
