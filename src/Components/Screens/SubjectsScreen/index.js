@@ -34,8 +34,8 @@ const SubjectButton = ({subject, onPress}) => (
 const SubjectsScreen = ({subjects}) => (
   <SafeAreaView style={styles.mainWrapper}>
     <View style={styles.screenWrapper}>
-      <ScrollView style={styles.scroll}>
-        <View style={styles.topElements}>
+      <ScrollView>
+        <View>
           <Header label="Personalise your content" backAction={() => {}} />
           <LightText extendedStyles={styles.lightText}>
             These tags will affect your questions feed. You can re-visit this
@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
   mainWrapper: {
     backgroundColor: '#f5f5f5',
   },
-  scroll: {},
-  topElements: {},
   screenWrapper: {
     paddingHorizontal: 15,
     justifyContent: 'space-between',
