@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SubjectsScreen from '../../../Components/Screens/SubjectsScreen';
+import { AppDispatch, AppState } from '../../../Context';
 
 const mockData = [
   {
@@ -32,8 +33,38 @@ const mockData = [
   },
 ];
 
-const SubjectsScreenContainer = () => {
-  return <SubjectsScreen subjects={mockData} />;
+const SubjectsScreenContainer = ({navigation}) => {
+  const {selectedSubjects} = useContext(AppState);
+  const dispatch = useContext(AppDispatch);
+
+  const onSelection = subject => {
+    if (selectedSubjects.includes(subject)) {
+      const subjectsCopy = [...selectedSubjects];
+      subjectsCopy.splice(selectedSubjects.indexOf(subject), 1);
+      dispatch({
+        type: 'SET_SELECTED_SUBJECT',
+        value: subjectsCopy,
+      });
+    } else {
+      dispatch({
+        type: 'SET_SELECTED_SUBJECT',
+        value: [...selectedSubjects, subject],
+      });
+    }
+  };
+
+  const onSubmit = () => {
+  };
+
+  return (
+    <SubjectsScreen
+      navigation={navigation}
+      selectedSubjects={selectedSubjects}
+      allSubjects={mockData}
+      onSelection={onSelection}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default SubjectsScreenContainer;

@@ -9,30 +9,17 @@ import PropTypes from 'prop-types';
 
 const context = {
   loading: true,
-  TEST: 'HELLO',
+  selectedSubjects: [],
 };
 
 const AppState = createContext(context);
 const AppDispatch = createContext(context);
 
 const AppReducer = (state, action) => {
-  if (action.type === 'ADD_ACTIVITY_COMPLETE') {
+  if (action.type === 'SET_SELECTED_SUBJECT') {
     return {
       ...state,
-      completedActivities: state.completedActivities.concat(action.value),
-    };
-  }
-  if (action.type === 'FETCH_ALL_CONTENT') {
-    return {
-      ...state,
-      ...action.value,
-      loading: false,
-    };
-  }
-  if (action.type === 'SET_ALL_ACTIVITIES') {
-    return {
-      ...state,
-      allActivities: action.value,
+      selectedSubjects: action.value,
     };
   }
 };

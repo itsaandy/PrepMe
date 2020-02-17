@@ -1,59 +1,43 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import LightText from '../../Common/Atoms/LightText';
 import Button from '../../Common/Atoms/Button';
 import Header from '../../Common/Molecules/Header';
+import SubjectButton from '../../Common/Atoms/SubjectButton';
 
-const SubjectButton = ({subject, onPress}) => (
-  <TouchableOpacity
-    style={{
-      backgroundColor: '#E7E7E7',
-      borderRadius: 14,
-      height: 28,
-      justifyContent: 'center',
-      paddingHorizontal: 14,
-      marginRight: 7,
-      marginBottom: 5,
-    }}>
-    <Text
-      style={{
-        fontWeight: 'bold',
-      }}>
-      {subject.name}
-    </Text>
-  </TouchableOpacity>
-);
-
-const SubjectsScreen = ({subjects}) => (
+const SubjectsScreen = ({
+  navigation,
+  selectedSubjects,
+  allSubjects,
+  onSelection,
+  onSubmit,
+}) => (
   <SafeAreaView style={styles.mainWrapper}>
     <View style={styles.screenWrapper}>
       <ScrollView>
         <View>
-          <Header label="Personalise your content" backAction={() => {}} />
+          <Header
+            label="Personalise your content"
+            backAction={() => navigation.goBack()}
+          />
           <LightText extendedStyles={styles.lightText}>
             These tags will affect your questions feed. You can re-visit this
             page in the future to re-personalise your feed!
           </LightText>
           <View style={styles.buttonsWrapper}>
-            {subjects.map(subject => (
+            {allSubjects.map(subject => (
               <SubjectButton
                 key={subject._id}
-                onPress={() => {}}
+                onPress={() => onSelection(subject)}
                 subject={subject}
+                isSelected={selectedSubjects.includes(subject)}
               />
             ))}
           </View>
         </View>
       </ScrollView>
       <View>
-        <Button label="NEXT" onPress={() => {}} />
+        <Button label="NEXT" onPress={onSubmit} />
       </View>
     </View>
   </SafeAreaView>
