@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import Button from '../Common/Atoms/Button';
+import Button from '../../Common/Atoms/Button';
+import Heading1 from '../../Common/Atoms/Heading1';
+import LightText from '../../Common/Atoms/LightText';
 
 const t = {
   welcome: {
@@ -13,16 +15,16 @@ const t = {
 const WelcomeScreen = ({imageDimensions, onLayout, onPress}) => {
   const styles = styleSheet(imageDimensions);
   return (
-    <SafeAreaView>
-      <View style={styles.wholeWrapper}>
+    <SafeAreaView style={styles.mainWrapper}>
+      <View style={styles.wrapper}>
         <View style={styles.textWrapper}>
-          <Text style={styles.title}>{t.welcome.title}</Text>
-          <Text style={styles.text}>{t.welcome.text}</Text>
+          <Heading1>{t.welcome.title}</Heading1>
+          <LightText extendedStyles={styles.text}>{t.welcome.text}</LightText>
         </View>
         <Image
           onLayout={onLayout}
           style={imageDimensions}
-          source={require('../../assets/images/welcome-image.png')}
+          source={require('../../../assets/images/welcome-image.png')}
         />
         <View style={styles.buttonWrapper}>
           <Button onPress={onPress} label="NEXT" />
@@ -34,7 +36,10 @@ const WelcomeScreen = ({imageDimensions, onLayout, onPress}) => {
 
 const styleSheet = theme =>
   StyleSheet.create({
-    wholeWrapper: {
+    mainWrapper: {
+      backgroundColor: '#f5f5f5',
+    },
+    wrapper: {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: '100%',
@@ -48,12 +53,6 @@ const styleSheet = theme =>
     },
     text: {
       marginTop: 20,
-      color: '#666666',
-    },
-    title: {
-      fontWeight: '500',
-      fontSize: 32,
-      color: '#1A1A1A',
     },
     image: {
       width: theme.width,

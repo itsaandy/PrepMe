@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {render, fireEvent, waitForElement} from 'react-native-testing-library';
-import WelcomeScreenContainer from '.';
-import WelcomeScreen from '../../Components/WelcomeScreen';
-import {ONBOARDING_SCREEN} from '../../Routing/routeConstants';
+import WelcomeScreenContainer from './index';
+import WelcomeScreen from '../../../Components/Screens/WelcomeScreen';
+import {ONBOARDING_SCREEN} from '../../../Routing/routeConstants';
 
 jest.mock('../../Components/WelcomeScreen', () => ({
   __esModule: true,

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import WelcomeScreen from '../../Components/WelcomeScreen';
-import {ONBOARDING_SCREEN} from '../../Routing/routeConstants';
+import WelcomeScreen from '../../../Components/Screens/WelcomeScreen';
+import {ONBOARDING_SCREEN} from '../../../Routing/routeConstants';
 
 const WelcomeScreenContainer = ({navigation}) => {
   const [screenWidth, setScreenWidth] = useState(0);

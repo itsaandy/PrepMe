@@ -1,8 +1,8 @@
 import React from 'react';
 import {fireEvent, render} from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
-import WelcomeScreen from '.';
-import Button from '../Common/Atoms/Button';
+import WelcomeScreen from './index';
+import Button from '../../Common/Atoms/Button';
 
 describe('welcome screen tests', () => {
   it('should match snapshot', () => {
