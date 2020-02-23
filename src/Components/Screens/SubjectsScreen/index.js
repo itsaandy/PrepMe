@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import LightText from '../../Common/Atoms/LightText';
 import Button from '../../Common/Atoms/Button';
 import Header from '../../Common/Molecules/Header';
@@ -11,6 +11,7 @@ const SubjectsScreen = ({
   allSubjects,
   onSelection,
   onSubmit,
+  isFetching,
 }) => (
   <SafeAreaView style={styles.mainWrapper}>
     <View style={styles.screenWrapper}>
@@ -24,16 +25,20 @@ const SubjectsScreen = ({
             These tags will affect your questions feed. You can re-visit this
             page in the future to re-personalise your feed!
           </LightText>
-          <View style={styles.buttonsWrapper}>
-            {allSubjects.map(subject => (
-              <SubjectButton
-                key={subject._id}
-                onPress={() => onSelection(subject)}
-                subject={subject}
-                isSelected={selectedSubjects.includes(subject)}
-              />
-            ))}
-          </View>
+          {isFetching ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            <View style={styles.buttonsWrapper}>
+              {allSubjects.map(subject => (
+                <SubjectButton
+                  key={subject._id}
+                  onPress={() => onSelection(subject)}
+                  subject={subject}
+                  isSelected={selectedSubjects.includes(subject)}
+                />
+              ))}
+            </View>
+          )}
         </View>
       </ScrollView>
       <View>

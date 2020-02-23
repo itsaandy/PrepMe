@@ -10,16 +10,23 @@ import PropTypes from 'prop-types';
 const context = {
   loading: true,
   selectedSubjects: [],
+  allSubjects: [],
 };
 
 const AppState = createContext(context);
 const AppDispatch = createContext(context);
 
 const AppReducer = (state, action) => {
-  if (action.type === 'SET_SELECTED_SUBJECT') {
+  if (action.type === 'SET_SELECTED_SUBJECTS') {
     return {
       ...state,
       selectedSubjects: action.value,
+    };
+  }
+  if (action.type === 'SET_ALL_SUBJECTS') {
+    return {
+      ...state,
+      allSubjects: action.value,
     };
   }
 };
