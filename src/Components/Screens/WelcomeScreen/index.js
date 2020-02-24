@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  StatusBar,
-  View,
-  ScrollView,
-} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Button from '../../Common/Atoms/Button';
-import Heading1 from '../../Common/Atoms/Heading1';
-import LightText from '../../Common/Atoms/LightText';
+import image from '../../../assets/images/welcome-image.png';
 
 const t = {
   welcome: {
@@ -22,40 +14,24 @@ const t = {
 const WelcomeScreen = ({imageDimensions, onLayout, onPress}) => {
   const styles = styleSheet(imageDimensions);
   return (
-    <>
-      <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
-      <SafeAreaView style={styles.mainWrapper}>
-        <View style={styles.wrapper}>
-          <ScrollView>
-            <View style={styles.wrapper}>
-              <View style={styles.textWrapper}>
-                <Heading1>{t.welcome.title}</Heading1>
-                <LightText extendedStyles={styles.text}>
-                  {t.welcome.text}
-                </LightText>
-              </View>
-              <Image
-                onLayout={onLayout}
-                style={imageDimensions}
-                source={require('../../../assets/images/welcome-image.png')}
-              />
-            </View>
-          </ScrollView>
-          <View style={styles.buttonWrapper}>
-            <Button onPress={onPress} label="NEXT" />
-          </View>
+    <SafeAreaView>
+      <View style={styles.wholeWrapper}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.title}>{t.welcome.title}</Text>
+          <Text style={styles.text}>{t.welcome.text}</Text>
         </View>
-      </SafeAreaView>
-    </>
+        <Image onLayout={onLayout} style={imageDimensions} source={image} />
+        <View style={styles.buttonWrapper}>
+          <Button onPress={onPress} label="NEXT" />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styleSheet = theme =>
   StyleSheet.create({
-    mainWrapper: {
-      backgroundColor: '#f5f5f5',
-    },
-    wrapper: {
+    wholeWrapper: {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: '100%',
@@ -69,6 +45,12 @@ const styleSheet = theme =>
     },
     text: {
       marginTop: 20,
+      color: '#666666',
+    },
+    title: {
+      fontWeight: '500',
+      fontSize: 32,
+      color: '#1A1A1A',
     },
     image: {
       width: theme.width,
@@ -76,7 +58,7 @@ const styleSheet = theme =>
     },
     buttonWrapper: {
       width: '95%',
-      marginBottom: 5,
+      marginBottom: 10,
     },
   });
 

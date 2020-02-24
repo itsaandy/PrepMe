@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  Text,
   ActivityIndicator,
 } from 'react-native';
 import LightText from '../../Common/Atoms/LightText';
