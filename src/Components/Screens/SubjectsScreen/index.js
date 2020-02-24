@@ -1,5 +1,13 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import LightText from '../../Common/Atoms/LightText';
 import Button from '../../Common/Atoms/Button';
 import Header from '../../Common/Molecules/Header';
@@ -13,42 +21,52 @@ const SubjectsScreen = ({
   onSubmit,
   isFetching,
 }) => (
-  <SafeAreaView style={styles.mainWrapper}>
-    <View style={styles.screenWrapper}>
-      <ScrollView>
+  <>
+    <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
+    <SafeAreaView style={styles.mainWrapper}>
+      <View style={styles.screenWrapper}>
+        <ScrollView>
+          <View>
+            <Header
+              label="Personalise your content"
+              backAction={() => navigation.goBack()}
+            />
+            <LightText extendedStyles={styles.lightText}>
+              These tags will affect your questions feed. You can re-visit this
+              page in the future to re-personalise your feed!
+            </LightText>
+            {isFetching ? (
+              <ActivityIndicator size="large" />
+            ) : (
+              <View style={styles.buttonsWrapper}>
+                {allSubjects.map(subject => (
+                  <SubjectButton
+                    key={subject._id}
+                    onPress={() => onSelection(subject)}
+                    subject={subject}
+                    isSelected={selectedSubjects.includes(subject)}
+                  />
+                ))}
+              </View>
+            )}
+          </View>
+        </ScrollView>
         <View>
-          <Header
-            label="Personalise your content"
-            backAction={() => navigation.goBack()}
+          <Button
+            extendedStyles={styles.button}
+            label="NEXT"
+            onPress={onSubmit}
           />
-          <LightText extendedStyles={styles.lightText}>
-            These tags will affect your questions feed. You can re-visit this
-            page in the future to re-personalise your feed!
-          </LightText>
-          {isFetching ? (
-            <ActivityIndicator size="large" />
-          ) : (
-            <View style={styles.buttonsWrapper}>
-              {allSubjects.map(subject => (
-                <SubjectButton
-                  key={subject._id}
-                  onPress={() => onSelection(subject)}
-                  subject={subject}
-                  isSelected={selectedSubjects.includes(subject)}
-                />
-              ))}
-            </View>
-          )}
         </View>
-      </ScrollView>
-      <View>
-        <Button label="NEXT" onPress={onSubmit} />
       </View>
-    </View>
-  </SafeAreaView>
+    </SafeAreaView>
+  </>
 );
 
 const styles = StyleSheet.create({
+  button: {
+    marginBottom: 5,
+  },
   mainWrapper: {
     backgroundColor: '#f5f5f5',
   },
