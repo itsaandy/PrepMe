@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-export const customFetch = (url, callback) => {
+export const customFetch = (url, callback, onError) => {
   axios
     .get(url)
     .then(res => callback(res.data))
     .catch(err => {
-      throw new Error(`PrepMe Error -- fetch error
-        ${err.message}`);
+      onError({
+        message: 'Error fetching content.',
+        detail: err.message,
+      });
     });
 };

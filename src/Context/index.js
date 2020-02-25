@@ -1,6 +1,6 @@
 import React, {createContext, useReducer, useEffect} from 'react';
 import PropTypes from 'prop-types';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 // import {
 //   ADD_ACTIVITY_COMPLETE,
 //   FETCH_ALL_CONTENT,
@@ -29,21 +29,28 @@ const AppReducer = (state, action) => {
       allSubjects: action.value,
     };
   }
+  if (action.type === 'FETCH_ALL_CONTENT') {
+    return {
+      ...state,
+      // ...action.value,
+      loading: false,
+    };
+  }
 };
 
 const makeMiddleware = dispatch => action => {
   switch (action.type) {
-    // case 'FETCH_ALL_CONTENT':
-    //   AsyncStorage.getItem('@appContent', (err, result) => {
-    //     if (err) {
-    //       console.err('-- ERROR', err);
-    //     }
-    //     if (result) {
-    //       const content = JSON.parse(result);
-    //       dispatch({type: 'FETCH_ALL_CONTENT', value: content});
-    //     }
-    //   });
-    //   break;
+    case 'FETCH_ALL_CONTENT':
+      AsyncStorage.getItem('@appContent', (err, result) => {
+        if (err) {
+          console.err('-- ERROR', err);
+        }
+        if (result) {
+          const content = JSON.parse(result);
+          dispatch({type: 'FETCH_ALL_CONTENT', value: content});
+        }
+      });
+      break;
     default:
       dispatch(action);
   }
@@ -55,8 +62,14 @@ const AppStateProvider = ({children}) => {
   const middleware = makeMiddleware(dispatch, state);
 
   useEffect(() => {
-    // AsyncStorage.setItem('@appContent', JSON.stringify(state));
+    if (state) {
+      AsyncStorage.setItem('@appContent', JSON.stringify(state));
+    }
   }, [state]);
+
+  useEffect(() => {
+    middleware({type: 'FETCH_ALL_CONTENT'});
+  }, []);
 
   return (
     <AppState.Provider value={state}>

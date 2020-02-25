@@ -11,15 +11,25 @@ const useSubjectsScreen = navigation => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(Config.SUBJECTS_ENDPOINT);
-    customFetch(Config.SUBJECTS_ENDPOINT, res => {
-      dispatch({
-        type: SET_ALL_SUBJECTS,
-        value: res,
-      });
-      setIsLoading(false);
-    });
+    // todo: add error page.
+    customFetch(
+      Config.SUBJECTS_ENDPOINT,
+      res => {
+        dispatch({
+          type: SET_ALL_SUBJECTS,
+          value: res,
+        }),
+          setIsLoading(false);
+      },
+      () => {},
+    );
   }, []);
+
+  useEffect(() => {
+    if (allSubjects.length > 0) {
+      setIsLoading(false);
+    }
+  }, [selectedSubjects]);
 
   const onSelection = subject => {
     const removeExisting = () => {
@@ -37,7 +47,7 @@ const useSubjectsScreen = navigation => {
       });
     };
 
-    if (selectedSubjects.includes(subject)) {
+    if (selectedSubjects.some(s => s._id === subject._id)) {
       removeExisting();
     } else {
       addNew();

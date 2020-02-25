@@ -43,7 +43,7 @@ const SubjectsScreen = ({
                     key={subject._id}
                     onPress={() => onSelection(subject)}
                     subject={subject}
-                    isSelected={selectedSubjects.includes(subject)}
+                    isSelected={selectedSubjects.some(s => s._id === subject._id)}
                   />
                 ))}
               </View>

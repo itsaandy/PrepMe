@@ -5,9 +5,9 @@ import image from '../../../assets/images/welcome-image.png';
 
 const t = {
   welcome: {
-    title: 'Welcome to your preparation tool.',
+    title: 'Welcome to your HSC preparation tool.',
     text:
-      'PrepMe helps your squeeze in more content in small, bite-sized chunks.',
+      'PrepMe helps your squeeze in more study content in small, bite-sized quizzes, so you can better prepare yourself for the big day.',
   },
 };
 
