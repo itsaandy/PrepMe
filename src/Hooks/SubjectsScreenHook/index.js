@@ -18,10 +18,12 @@ const useSubjectsScreen = navigation => {
         dispatch({
           type: SET_ALL_SUBJECTS,
           value: res,
-        }),
-          setIsLoading(false);
+        });
+        setIsLoading(false);
       },
-      () => {},
+      () => {
+        setIsLoading(false);
+      },
     );
   }, []);
 
@@ -29,7 +31,7 @@ const useSubjectsScreen = navigation => {
     if (allSubjects.length > 0) {
       setIsLoading(false);
     }
-  }, [selectedSubjects]);
+  }, [allSubjects]);
 
   const onSelection = subject => {
     const removeExisting = () => {

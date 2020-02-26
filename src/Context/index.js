@@ -1,11 +1,11 @@
 import React, {createContext, useReducer, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
-// import {
-//   ADD_ACTIVITY_COMPLETE,
-//   FETCH_ALL_CONTENT,
-//   SET_ALL_ACTIVITIES,
-// } from './contextConstants';
+import {
+  EXTRACT_APP_CONTENT,
+  SET_ALL_SUBJECTS,
+  SET_SELECTED_SUBJECTS,
+} from './constants';
 
 const context = {
   loading: true,
@@ -17,43 +17,43 @@ const AppState = createContext(context);
 const AppDispatch = createContext(context);
 
 const AppReducer = (state, action) => {
-  if (action.type === 'SET_SELECTED_SUBJECTS') {
-    return {
-      ...state,
-      selectedSubjects: action.value,
-    };
-  }
-  if (action.type === 'SET_ALL_SUBJECTS') {
-    return {
-      ...state,
-      allSubjects: action.value,
-    };
-  }
-  if (action.type === 'FETCH_ALL_CONTENT') {
-    return {
-      ...state,
-      // ...action.value,
-      loading: false,
-    };
+  switch (action.type) {
+    case SET_SELECTED_SUBJECTS:
+      return {...state, selectedSubjects: action.value};
+    case SET_ALL_SUBJECTS:
+      return {...state, allSubjects: action.value};
+    case EXTRACT_APP_CONTENT:
+      return {...state, ...action.value};
+    default:
+      return {...state};
   }
 };
 
 const makeMiddleware = dispatch => action => {
-  switch (action.type) {
-    case 'FETCH_ALL_CONTENT':
-      AsyncStorage.getItem('@appContent', (err, result) => {
-        if (err) {
-          console.err('-- ERROR', err);
-        }
-        if (result) {
-          const content = JSON.parse(result);
-          dispatch({type: 'FETCH_ALL_CONTENT', value: content});
-        }
-      });
-      break;
-    default:
-      dispatch(action);
+  if (action.type === EXTRACT_APP_CONTENT) {
+    AsyncStorage.getItem('@appContent', (err, result) => {
+      if (err) {
+        console.err('-- ERROR', err);
+      }
+      if (result) {
+        const content = JSON.parse(result);
+        dispatch({type: EXTRACT_APP_CONTENT, value: content});
+      }
+    });
+  } else {
+    dispatch(action);
   }
+};
+
+const useStoredContent = (middleware, state) => {
+  // Order of these useEffects matter. extract -> set
+  useEffect(() => {
+    middleware({type: EXTRACT_APP_CONTENT});
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem('@appContent', JSON.stringify(state));
+  }, [state]);
 };
 
 const AppStateProvider = ({children}) => {
@@ -61,15 +61,7 @@ const AppStateProvider = ({children}) => {
 
   const middleware = makeMiddleware(dispatch, state);
 
-  useEffect(() => {
-    if (state) {
-      AsyncStorage.setItem('@appContent', JSON.stringify(state));
-    }
-  }, [state]);
-
-  useEffect(() => {
-    middleware({type: 'FETCH_ALL_CONTENT'});
-  }, []);
+  useStoredContent(middleware, state);
 
   return (
     <AppState.Provider value={state}>
