@@ -84,7 +84,7 @@ describe('subjects screen hook test', () => {
   it('should return true for onLoading initially', () => {
     const allSubjects = ['sub1', 'sub2'];
     setContextMock([], allSubjects, () => {});
-    const {getByText} = render(<MockComponent />);
+    const {getByText, debug} = render(<MockComponent />);
     getByText('loading');
   });
   it('should return false for onLoading after customFetch completes', async () => {

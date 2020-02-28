@@ -4,7 +4,10 @@ import React from 'react';
 const SubjectButton = ({subject, onPress, isSelected}) => {
   const styles = styleSheet(isSelected);
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      style={styles.button}
+      onPress={onPress}>
       <Text style={styles.text}>{subject.name}</Text>
     </TouchableOpacity>
   );

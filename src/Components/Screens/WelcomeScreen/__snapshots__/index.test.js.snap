@@ -40,7 +40,7 @@ exports[`welcome screen tests should match snapshot 1`] = `
           }
         }
       >
-        PrepMe helps your squeeze in more content in small, bite-sized chunks.
+        PrepMe helps your squeeze in more study content in small, bite-sized quizzes, so you can better prepare yourself for your big day.
       </Text>
     </View>
     <Image

@@ -5,7 +5,7 @@ import WelcomeScreenContainer from './index';
 import WelcomeScreen from '../../../Components/Screens/WelcomeScreen';
 import {ONBOARDING_SCREEN} from '../../../Routing/routeConstants';
 
-jest.mock('../../Components/WelcomeScreen', () => ({
+jest.mock('../../../Components/Screens/WelcomeScreen', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
