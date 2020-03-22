@@ -3,7 +3,7 @@ import {AppDispatch, AppState} from '../../Context';
 import {customFetch} from '../../Infrastructure/fetch';
 import Config from 'react-native-config';
 import {SET_ALL_SUBJECTS, SET_SELECTED_SUBJECTS} from '../../Context/constants';
-import {FETCH_HOME_FEED} from '../../Routing/routeConstants';
+import { HOME_SCREEN } from '../../Routing/routeConstants';
 
 const useSubjectsScreen = navigation => {
   const {selectedSubjects, allSubjects} = useContext(AppState);
@@ -57,7 +57,7 @@ const useSubjectsScreen = navigation => {
   };
 
   const onSubmit = () => {
-    navigation.navigate(FETCH_HOME_FEED);
+    navigation.navigate(HOME_SCREEN);
   };
   return {selectedSubjects, allSubjects, isLoading, onSelection, onSubmit};
 };

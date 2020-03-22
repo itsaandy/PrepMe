@@ -9,6 +9,7 @@ import {
 
 const context = {
   loading: true,
+  hasCompletedOnboarding: false,
   selectedSubjects: [],
   allSubjects: [],
 };
