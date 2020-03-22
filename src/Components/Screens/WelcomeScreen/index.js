@@ -1,7 +1,15 @@
 import React from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+} from 'react-native';
 import Button from '../../Common/Atoms/Button';
 import image from '../../../assets/images/welcome-image.png';
+import {AppTheme} from '../../../Context';
 
 const t = {
   welcome: {
@@ -12,25 +20,35 @@ const t = {
 };
 
 const WelcomeScreen = ({imageDimensions, onLayout, onPress}) => {
-  const styles = styleSheet(imageDimensions);
+  const {theme} = React.useContext(AppTheme);
+  const styles = styleSheet({
+    imageDimensions,
+    ...theme,
+  });
   return (
-    <SafeAreaView>
-      <View style={styles.wholeWrapper}>
-        <View style={styles.textWrapper}>
-          <Text style={styles.title}>{t.welcome.title}</Text>
-          <Text style={styles.text}>{t.welcome.text}</Text>
+    <>
+      <StatusBar barStyle={theme.colors.statusBar} />
+      <SafeAreaView style={styles.background}>
+        <View style={styles.wholeWrapper}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.title}>{t.welcome.title}</Text>
+            <Text style={styles.text}>{t.welcome.text}</Text>
+          </View>
+          <Image onLayout={onLayout} style={imageDimensions} source={image} />
+          <View style={styles.buttonWrapper}>
+            <Button onPress={onPress} label="NEXT" />
+          </View>
         </View>
-        <Image onLayout={onLayout} style={imageDimensions} source={image} />
-        <View style={styles.buttonWrapper}>
-          <Button onPress={onPress} label="NEXT" />
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 };
 
 const styleSheet = theme =>
   StyleSheet.create({
+    background: {
+      backgroundColor: theme.colors.background,
+    },
     wholeWrapper: {
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -45,16 +63,16 @@ const styleSheet = theme =>
     },
     text: {
       marginTop: 20,
-      color: '#666666',
+      color: theme.colors.descriptionText,
     },
     title: {
       fontWeight: '500',
       fontSize: 32,
-      color: '#1A1A1A',
+      color: theme.colors.heading,
     },
     image: {
-      width: theme.width,
-      height: theme.height,
+      width: theme.imageDimensions.width,
+      height: theme.imageDimensions.height,
     },
     buttonWrapper: {
       width: '95%',

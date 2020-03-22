@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { AppTheme } from '../../../../Context';
 
 const Button = ({label, onPress, extendedStyles}) => {
-  const styles = styleSheet();
+  const {theme} = React.useContext(AppTheme);
+  const styles = styleSheet(theme);
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -32,13 +34,13 @@ const styleSheet = theme =>
     wrapper: {
       width: '100%',
       height: 48,
-      backgroundColor: '#4d13da',
+      backgroundColor: theme.colors.primaryButton,
       justifyContent: 'center',
       borderRadius: 5,
     },
     text: {
       textAlign: 'center',
-      color: 'white',
+      color: theme.colors.buttonText,
       fontWeight: 'bold',
     },
   });
